@@ -1,32 +1,40 @@
 from flask import Flask, request
 import subprocess
 import traceback
+import threading
+import os
 
 app = Flask(__name__)
 
 def deploy():
     try:
-        subprocess.run(['git pull', 'yarn install', 'docker-compose up -d --build'])
-        return True
-    except:
-        traceback.print_exc()
-        return False
+        # subprocess.run(['git', 'pull'], check=True, capture_output=True)
+        # subprocess.run(['yarn', 'install'], check=True, capture_output=True)
+        # subprocess.run(['docker-compose up -d --build'], check=True, capture_output=True)
+
+        os.system('git pull')
+        os.system('docker-compose up -d --build')
+    except Exception as e:
+        print(e)
 
 @app.route('/', methods=['POST'])
 def handle_hook():
     if (request.json):
         req_body = request.json
-        print(req_body)
         try:
             if request.headers.get('X-GitHub-Event') == 'pull request':
-                if req_body.get('action') == 'closed' and req_body.get('pull_request').get('merged') and req_body.get('pull_request').get('head').get('ref') == 'qa':
+                if req_body.get('action') == 'closed' and req_body.get('pull_request').get('merged') == True and req_body.get('pull_request').get('head').get('ref') == 'qa':
+                    blah = threading.Thread(target=deploy)
+                    blah.start()
                     return {
-                        "success": deploy(),
+                        "success": True
                     }
             elif request.headers.get('X-GitHub-Event') == 'push':
-                if req_body.get('ref') == 'refs/head/qa':
+                if req_body.get('ref') == 'refs/heads/qa':
+                    blah = threading.Thread(target=deploy)
+                    blah.start()
                     return {
-                        "success": deploy()
+                        "success": True
                     }
         except:
             traceback.print_exc()

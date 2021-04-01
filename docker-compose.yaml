@@ -3,6 +3,12 @@ version: "3"
 services:
   server:
     build: .
-    ports:
-      - "80:80"
-    
+    restart: always
+  proxy:
+    dockerfile: ./proxy/Dockerfile
+    build: ./proxy/.
+    restart: always
+    depends_on: 
+      - server
+    volumes:
+      - ./proxy/cert:/cert
