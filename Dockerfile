@@ -13,6 +13,7 @@ COPY modules ./modules
 COPY public ./public
 COPY store ./store
 COPY styles ./styles
+COPY pages ./pages
 COPY .babelrc ./
 COPY .eslintrc ./
 COPY .lintstagedrc ./
