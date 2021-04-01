@@ -12,6 +12,7 @@ export default function Home() {
 
          <main className={styles.main}>
             <h1 className={styles.title}>Địt con mẹ thằng Nam</h1>
+            <h2>TEST 123</h2>
 
             <p className={styles.description}>
                Get started by editing <code className={styles.code}>pages/index.js</code>
