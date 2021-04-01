@@ -4,11 +4,9 @@ WORKDIR /etc/nginx/conf.d
 
 RUN rm default.conf
 
-COPY nginx_ssl.conf proxy_params /tmp/conf/
+COPY nginx-ssl.conf proxy_params /tmp/conf/
 COPY start.sh /
 
 EXPOSE 80 443
-
-VOLUME ["/taiga-cert", "/taiga-conf"]
 
 CMD ["/start.sh"]
