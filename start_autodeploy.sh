@@ -1,2 +1,2 @@
 #!/bin/bash
-forever run -c python3 deploy.py
+forever start -c python3 deploy.py

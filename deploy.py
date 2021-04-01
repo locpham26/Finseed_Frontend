@@ -14,7 +14,6 @@ def deploy():
 
 @app.route('/', methods=['POST'])
 def handle_hook():
-    print(request.json)
     if (request.json):
         req_body = request.json
         print(req_body)
