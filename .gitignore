@@ -34,5 +34,7 @@ yarn-error.log*
 .vercel
 yarn.lock
 
-/proxy/.cert/private.pem
-/proxy/.cert/public.pem
+deploy.py
+start_autodeploy.sh
+docker-compose.yaml
+Dockerfile
