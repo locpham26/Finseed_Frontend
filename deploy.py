@@ -19,12 +19,21 @@ def handle_hook():
         req_body = request.json
         print(req_body)
         try:
-            if req_body.get('action') == 'closed' and req_body.get('pull_request').get('merged') and req_body.get('pull_request').get('head').get('ref') == 'production':
-                deploy()
-            elif req_body.get('action') :
-                deploy()
+            if request.headers.get('X-GitHub-Event') == 'pull request':
+                if req_body.get('action') == 'closed' and req_body.get('pull_request').get('merged') and req_body.get('pull_request').get('head').get('ref') == 'qa':
+                    return {
+                        "success": deploy(),
+                    }
+            elif request.headers.get('X-GitHub-Event') == 'push':
+                if req_body.get('ref') == 'refs/head/qa':
+                    return {
+                        "success": deploy()
+                    }
         except:
             traceback.print_exc()
+    return {
+        "success": False
+    }
 
 if __name__ == "__main__":
-    app.run(port=9696)
+    app.run(host='0.0.0.0', port=9696)
