@@ -7,7 +7,6 @@ services:
   proxy:
     build:
       context: ./proxy/.
-      dockerfile: ./proxy/Dockerfile
     restart: always
     depends_on: 
       - server
