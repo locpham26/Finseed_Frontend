@@ -6,7 +6,7 @@ app = Flask(__name__)
 
 def deploy():
     try:
-        subprocess.run(['git pull', 'docker-compose up -d --build'])
+        subprocess.run(['git pull', 'yarn install', 'docker-compose up -d --build'])
         return True
     except:
         traceback.print_exc()
