@@ -1,9 +1,7 @@
 const AntdDayjsWebpackPlugin = require('antd-dayjs-webpack-plugin');
 require('dotenv').config();
+const fs = require('fs');
 const webpack = require('webpack');
-const withCSS = require('@zeit/next-css');
-const withSass = require('@zeit/next-sass');
-const withLess = require('@zeit/next-less');
 const withPlugins = require('next-compose-plugins');
 const optimizedImages = require('next-optimized-images');
 const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
@@ -24,7 +22,7 @@ const getNextConfigBuildTime = () => {
       require.extensions['.less'] = (file) => {};
    }
 
-   const plugins = [withBundleAnalyzer, [optimizedImages, { inlineImageLimit: -1 }], withLess, withSass, withCSS];
+   const plugins = [withBundleAnalyzer, [optimizedImages, { inlineImageLimit: -1 }]];
 
    const nextConfig = {
       // https://stackoverflow.com/questions/61240582/how-to-configure-next-js-with-antd-less-and-sass-css-modules
@@ -39,6 +37,9 @@ const getNextConfigBuildTime = () => {
       images: {
          domains: ['test.giangthom.org']
       },
+      future: {
+         webpack5: true
+      },
       webpack: (config, { isServer }) => {
          const webpackConfig = { ...config };
          // read .env
@@ -49,31 +50,27 @@ const getNextConfigBuildTime = () => {
 
          // overwrite antd with custom variables
          // (https://github.com/zeit/next.js/tree/canary/examples/with-ant-design-less)
-         if (isServer) {
-            const antStyles = /antd\/.*?\/style.*?/;
-            const origExternals = [...webpackConfig.externals];
-            webpackConfig.externals = [
-               // eslint-disable-next-line consistent-return
-               (context, request, callback) => {
-                  if (request.match(antStyles)) return callback();
-                  if (typeof origExternals[0] === 'function') {
-                     origExternals[0](context, request, callback);
-                  } else {
-                     callback();
-                  }
-               },
-               ...(typeof origExternals[0] === 'function' ? [] : origExternals)
-            ];
+         //  if (isServer) {
+         //     const antStyles = /antd\/.*?\/style.*?/;
+         //     const origExternals = [...webpackConfig.externals];
+         //     webpackConfig.externals = [
+         //        // eslint-disable-next-line consistent-return
+         //        (context, request, callback) => {
+         //           if (request.match(antStyles)) return callback();
+         //           if (typeof origExternals[0] === 'function') {
+         //              origExternals[0](context, request, callback);
+         //           } else {
+         //              callback();
+         //           }
+         //        },
+         //        ...(typeof origExternals[0] === 'function' ? [] : origExternals)
+         //     ];
 
-            webpackConfig.module.rules.unshift({
-               test: antStyles,
-               use: 'null-loader'
-            });
-         }
-
-         webpackConfig.node = {
-            fs: 'empty'
-         };
+         //     webpackConfig.module.rules.unshift({
+         //        test: antStyles,
+         //        use: 'null-loader'
+         //     });
+         //  }
 
          webpackConfig.module.rules.push({
             test: /\.(png|woff|woff2|eot|ttf|svg|gif|jpg)$/,
