@@ -9,7 +9,18 @@ RUN yarn install
 # Rebuild the source code only when needed
 FROM node:alpine AS builder
 WORKDIR /app
-COPY . .
+COPY modules ./modules
+COPY public ./public
+COPY store ./store
+COPY styles ./styles
+COPY .babelrc ./
+COPY .eslintrc ./
+COPY .lintstagedrc ./
+COPY .prettierrc ./
+COPY jsconfig.json ./
+COPY next.config.js ./
+COPY package.json ./
+COPY yarn.lock ./
 COPY --from=deps /app/node_modules ./node_modules
 RUN yarn build
 
