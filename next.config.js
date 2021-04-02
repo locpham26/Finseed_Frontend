@@ -50,27 +50,27 @@ const getNextConfigBuildTime = () => {
 
          // overwrite antd with custom variables
          // (https://github.com/zeit/next.js/tree/canary/examples/with-ant-design-less)
-         //  if (isServer) {
-         //     const antStyles = /antd\/.*?\/style.*?/;
-         //     const origExternals = [...webpackConfig.externals];
-         //     webpackConfig.externals = [
-         //        // eslint-disable-next-line consistent-return
-         //        (context, request, callback) => {
-         //           if (request.match(antStyles)) return callback();
-         //           if (typeof origExternals[0] === 'function') {
-         //              origExternals[0](context, request, callback);
-         //           } else {
-         //              callback();
-         //           }
-         //        },
-         //        ...(typeof origExternals[0] === 'function' ? [] : origExternals)
-         //     ];
+         if (isServer) {
+            const antStyles = /antd\/.*?\/style.*?/;
+            const origExternals = [...webpackConfig.externals];
+            webpackConfig.externals = [
+               // eslint-disable-next-line consistent-return
+               (context, request, callback) => {
+                  if (request.match(antStyles)) return callback();
+                  if (typeof origExternals[0] === 'function') {
+                     origExternals[0](context, request, callback);
+                  } else {
+                     callback();
+                  }
+               },
+               ...(typeof origExternals[0] === 'function' ? [] : origExternals)
+            ];
 
-         //     webpackConfig.module.rules.unshift({
-         //        test: antStyles,
-         //        use: 'null-loader'
-         //     });
-         //  }
+            webpackConfig.module.rules.unshift({
+               test: antStyles,
+               use: 'null-loader'
+            });
+         }
 
          webpackConfig.module.rules.push({
             test: /\.(png|woff|woff2|eot|ttf|svg|gif|jpg)$/,
