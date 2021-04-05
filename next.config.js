@@ -4,6 +4,8 @@ const withCSS = require('@zeit/next-css');
 const lessToJS = require('less-vars-to-js');
 const fs = require('fs');
 const path = require('path');
+const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
+const cssNano = require('cssnano');
 
 // Where your antd-custom.less file lives
 const themeVariables = lessToJS(fs.readFileSync(path.resolve(__dirname, './styles/antd-custom.less'), 'utf8'));
@@ -20,6 +22,9 @@ module.exports = withCSS(
          cssLoaderOptions: {
             importLoaders: 3,
             localIdentName: '[local]___[hash:base64:5]'
+         },
+         images: {
+            domains: []
          },
          webpack: (config, { isServer }) => {
             // Make Ant styles work with less
@@ -52,6 +57,16 @@ module.exports = withCSS(
                   }
                ]
             });
+
+            config.optimization.minimizer.push(
+               new OptimizeCssAssetsPlugin({
+                  cssProcessor: cssNano,
+                  cssProcessorPluginOptions: {
+                     preset: ['default', { discardComments: { removeAll: true } }]
+                  },
+                  canPrint: true
+               })
+            );
 
             return config;
          }
