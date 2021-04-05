@@ -4,6 +4,8 @@ const withCSS = require('@zeit/next-css');
 const lessToJS = require('less-vars-to-js');
 const fs = require('fs');
 const path = require('path');
+const webpack = require('webpack');
+const AntdDayjsWebpackPlugin = require('antd-dayjs-webpack-plugin');
 
 // Where your antd-custom.less file lives
 const themeVariables = lessToJS(fs.readFileSync(path.resolve(__dirname, './styles/antd-custom.less'), 'utf8'));
@@ -21,7 +23,14 @@ module.exports = withCSS(
             modifyVars: themeVariables, // make your antd custom effective
             importLoaders: 0
          },
+         images: {
+            domains: ['finseed-frontend.vercel.app', 'localhost:3000', 'test.giangthom.org']
+         },
          webpack: (config, { isServer }) => {
+            config.plugins.push(new webpack.EnvironmentPlugin(process.env));
+
+            config.plugins.push(new AntdDayjsWebpackPlugin());
+
             // Make Ant styles work with less
             if (isServer) {
                const antStyles = /antd\/.*?\/style.*?/;
