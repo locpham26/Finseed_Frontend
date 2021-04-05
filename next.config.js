@@ -43,6 +43,16 @@ module.exports = withCSS(
                   use: 'null-loader'
                });
             }
+
+            config.module.rules.push({
+               test: /\.(png|woff|woff2|eot|ttf|svg|gif|jpg)$/,
+               use: [
+                  {
+                     loader: 'url-loader'
+                  }
+               ]
+            });
+
             return config;
          }
       })
