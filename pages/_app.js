@@ -1,8 +1,7 @@
 import React from 'react';
 import Head from 'next/head';
 import { Provider } from 'react-redux';
-import '../styles/globals.css';
-import 'antd/dist/antd.css';
+import 'antd/dist/antd.less';
 import { useStore } from '../store';
 
 function MyApp({ Component, pageProps }) {
