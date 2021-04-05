@@ -1,10 +1,11 @@
 import React from 'react';
 import Head from 'next/head';
 import { Provider } from 'react-redux';
-import 'antd/dist/antd.css';
 import { ThemeProvider } from 'styled-components';
 import theme from 'styles/config/theme/default';
+import '../styles/globals.css';
 import { useStore } from '../store';
+import 'antd/dist/antd.css';
 
 function MyApp({ Component, pageProps }) {
    const store = useStore(pageProps.initialReduxState);
@@ -19,9 +20,9 @@ function MyApp({ Component, pageProps }) {
          </Head>
 
          <Provider store={store}>
-            <ThemeProvider theme={theme}>
-               <Component {...pageProps} />
-            </ThemeProvider>
+            {/* <ThemeProvider theme={theme}> */}
+            <Component {...pageProps} />
+            {/* </ThemeProvider> */}
          </Provider>
       </>
    );
