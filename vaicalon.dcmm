@@ -4,6 +4,8 @@ const withCSS = require('@zeit/next-css');
 const lessToJS = require('less-vars-to-js');
 const fs = require('fs');
 const path = require('path');
+const webpack = require('webpack');
+const AntdDayjsWebpackPlugin = require('antd-dayjs-webpack-plugin');
 const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 const cssNano = require('cssnano');
 
@@ -11,22 +13,23 @@ const cssNano = require('cssnano');
 const themeVariables = lessToJS(fs.readFileSync(path.resolve(__dirname, './styles/antd-custom.less'), 'utf8'));
 
 module.exports = withCSS(
-   withSass({
-      cssModules: true,
-      ...withLess({
+   withSass(
+      withLess({
+         cssModules: true,
+         cssLoaderOptions: {
+            importLoaders: 3,
+            localIdentName: '[local]___[hash:base64:5]'
+         },
          lessLoaderOptions: {
             javascriptEnabled: true,
             modifyVars: themeVariables, // make your antd custom effective
             importLoaders: 0
          },
-         cssLoaderOptions: {
-            importLoaders: 3,
-            localIdentName: '[local]___[hash:base64:5]'
-         },
-         images: {
-            domains: []
-         },
          webpack: (config, { isServer }) => {
+            config.plugins.push(new webpack.EnvironmentPlugin(process.env));
+
+            config.plugins.push(new AntdDayjsWebpackPlugin());
+
             // Make Ant styles work with less
             if (isServer) {
                const antStyles = /antd\/.*?\/style.*?/;
@@ -67,9 +70,8 @@ module.exports = withCSS(
                   canPrint: true
                })
             );
-
             return config;
          }
       })
-   })
+   )
 );
