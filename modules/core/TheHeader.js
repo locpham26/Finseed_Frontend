@@ -2,15 +2,15 @@ import React from 'react';
 import { Layout } from 'antd';
 import { useTheme } from 'styled-components';
 import { useRouter } from 'next/router';
-import Logo from 'images/f.svg';
+
 import IndexList from './IndexList';
-import { LoginButton, StyledLogoContainer } from './BaseComponents.styles';
+import { LoginButton } from './BaseComponents.styles';
 
 const { Header } = Layout;
 
 function TheHeader() {
    const theme = useTheme();
-   const history = useRouter();
+
    return (
       <Header
          className="dp-space-bw"
@@ -26,9 +26,6 @@ function TheHeader() {
          }}
       >
          <div style={{ display: 'flex' }}>
-            <StyledLogoContainer onClick={() => history.push('/')}>
-               <img src={Logo} />
-            </StyledLogoContainer>
             <IndexList />
          </div>
 

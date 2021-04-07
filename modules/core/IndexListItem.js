@@ -16,7 +16,7 @@ function IndexListItem({ indexName, indexValue, indexStatus, indexChange }) {
                <StyledIndexChange status={indexStatus}>{indexChange}</StyledIndexChange>
             </div>
          </StyledIndexItem>
-         <SeparatorIcon />
+         <img src={SeparatorIcon} />
       </>
    );
 }
