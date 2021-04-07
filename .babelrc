@@ -13,7 +13,8 @@
                 "alias": {
                     "@core": "./modules/core",
                     "@scan_pdf": "./modules/scan_pdf",
-                    "@search_engine": "./modules/search_engine"
+                    "@search_engine": "./modules/search_engine",
+                    "images": ["./public/images"]
                 }
             }
         ]

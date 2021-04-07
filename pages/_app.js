@@ -3,7 +3,8 @@ import Head from 'next/head';
 import { Provider } from 'react-redux';
 import { ThemeProvider } from 'styled-components';
 import theme from 'styles/config/theme/default';
-import '../styles/globals.css';
+import TheHeader from '@core/TheHeader';
+import GlobalStyles from 'styles/globalStyles';
 import { useStore } from '../store';
 import 'antd/dist/antd.css';
 
@@ -20,9 +21,11 @@ function MyApp({ Component, pageProps }) {
          </Head>
 
          <Provider store={store}>
-            {/* <ThemeProvider theme={theme}> */}
-            <Component {...pageProps} />
-            {/* </ThemeProvider> */}
+            <ThemeProvider theme={theme}>
+               <GlobalStyles />
+               <TheHeader />
+               <Component {...pageProps} />
+            </ThemeProvider>
          </Provider>
       </>
    );
