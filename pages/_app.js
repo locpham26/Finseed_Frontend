@@ -10,7 +10,7 @@ import Layout, { Content } from 'antd/lib/layout/layout';
 import { useStore } from '../store';
 import 'antd/dist/antd.css';
 
-function MyApp({ Component, pageProps, children }) {
+function MyApp({ Component, pageProps }) {
    const store = useStore(pageProps.initialReduxState);
 
    return (
@@ -43,11 +43,10 @@ function MyApp({ Component, pageProps, children }) {
                            overflowY: 'auto'
                         }}
                      >
-                        {children}
+                        <Component {...pageProps} />
                      </Content>
                   </Layout>
                </Layout>
-               <Component {...pageProps} />
             </ThemeProvider>
          </Provider>
       </>
