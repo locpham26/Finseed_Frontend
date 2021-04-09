@@ -12,6 +12,7 @@ import { useSelector } from 'react-redux';
 // import ScanPdfEdit from './ScanPdfEdit';
 import { DOMAIN } from 'constants';
 import { ScanContainerBodyStyles, ScanContainerStyles } from '../components/file_upload_styles';
+import ScanPdfHistory from './file_upload_history';
 // import rowToCol from '../../utils/rowToCol';
 // import sampleData from './sample.json';
 
@@ -79,8 +80,8 @@ function ScanPdfLayout() {
                <Step key={item.title} title={item.title} disabled={i > current} />
             ))}
          </Steps>
-         {/* {current === 0 && <ScanPdfHistory next={() => next()} />}
-         <ScanContainerBodyStyles>
+         {current === 0 && <ScanPdfHistory next={() => next()} />}
+         {/* <ScanContainerBodyStyles>
             {current === 1 && <ScanPdfPreview />}
             {current === 2 && (loading ? <Spin /> : <ScanPdfEdit scanData={scanData} />)}
          </ScanContainerBodyStyles> */}

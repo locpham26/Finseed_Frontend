@@ -8,7 +8,8 @@ import GlobalStyles from 'styles/globalStyles';
 import TheSideBar from '@core/TheSideBar';
 import Layout, { Content } from 'antd/lib/layout/layout';
 import { useStore } from '../store';
-import 'antd/dist/antd.css';
+// import 'antd/dist/antd.css';
+import 'styles/app.less';
 
 function MyApp({ Component, pageProps }) {
    const store = useStore(pageProps.initialReduxState);
