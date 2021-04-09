@@ -8,7 +8,7 @@ import { ScanPdfHistoryStyles } from '../components/file_upload_styles';
 
 const { Dragger } = Upload;
 
-function ScanPdfHistory({ next }) {
+function ScanPdfHistory({ next, setFile }) {
    // const history = useHistory();
    const dispatch = useDispatch();
 
@@ -22,6 +22,7 @@ function ScanPdfHistory({ next }) {
       beforeUpload: () => false,
       onChange(info) {
          // dispatch(postPdf(info.file));
+         setFile(info.file);
          next();
          // history.push({ pathname: '/scan-pdf/preview', file: info.file });
          // if (info.file.status === "done") {

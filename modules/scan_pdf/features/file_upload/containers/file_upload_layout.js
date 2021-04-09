@@ -1,8 +1,5 @@
 import { Button, message, notification, Spin, Steps, Upload } from 'antd';
 import React, { useEffect, useState } from 'react';
-import styled from 'styled-components';
-import { palette } from 'styled-theme';
-import { PlusOutlined, InboxOutlined } from '@ant-design/icons';
 // import { useHistory } from 'react-router-dom';
 import { io } from 'socket.io-client';
 import { useSelector } from 'react-redux';
@@ -13,8 +10,10 @@ import { useSelector } from 'react-redux';
 import { DOMAIN } from 'constants';
 import { ScanContainerBodyStyles, ScanContainerStyles } from '../components/file_upload_styles';
 import ScanPdfHistory from './file_upload_history';
+import ScanPdfPreview from './file_upload_preview';
+import ScanPdfEdit from './file_upload_edit';
 // import rowToCol from '../../utils/rowToCol';
-// import sampleData from './sample.json';
+import sampleData from '../components/sample.json';
 
 const { Step } = Steps;
 
@@ -36,7 +35,8 @@ const steps = [
 function ScanPdfLayout() {
    const [current, setCurrent] = useState(0);
    const [loading, setLoading] = useState(false);
-   const [scanData, setScanData] = useState('');
+   const [scanData, setScanData] = useState(sampleData);
+   const [file, setFile] = useState();
 
    const next = () => {
       setCurrent(current + 1);
@@ -80,11 +80,12 @@ function ScanPdfLayout() {
                <Step key={item.title} title={item.title} disabled={i > current} />
             ))}
          </Steps>
-         {current === 0 && <ScanPdfHistory next={() => next()} />}
-         {/* <ScanContainerBodyStyles>
-            {current === 1 && <ScanPdfPreview />}
-            {current === 2 && (loading ? <Spin /> : <ScanPdfEdit scanData={scanData} />)}
-         </ScanContainerBodyStyles> */}
+         {current === 0 && <ScanPdfHistory next={() => next()} setFile={setFile} />}
+         <ScanContainerBodyStyles>
+            {current === 1 && <ScanPdfPreview file={file} />}
+            {/* {current === 2 && (loading ? <Spin /> : <ScanPdfEdit scanData={scanData} />)} */}
+            {current === 2 && <ScanPdfEdit scanData={scanData} file={file} />}
+         </ScanContainerBodyStyles>
          <div className="dp-space-bw" style={{ marginTop: 16 }}>
             {/* {current > 0 && ( */}
             <Button
