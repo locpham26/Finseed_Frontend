@@ -1,14 +1,37 @@
-import { createAction, createSlice } from '@reduxjs/toolkit';
+import { createSlice } from '@reduxjs/toolkit';
+// eslint-disable-next-line import/no-unresolved
+import { asyncScanActions } from '@util/utilScan';
 
-const initialState = {};
+const initialState = {
+   getDownload: {},
+   postPdf: {}
+};
+
+export const postPdf = asyncScanActions('PDF_POST_FILE');
 
 const slice = createSlice({
    name: 'upload',
    initialState,
    reducers: {},
-   extraReducers: {}
+   extraReducers: {
+      [postPdf.START]: (state, { payload, meta }) => {
+         return {
+            status: 'started'
+         };
+      },
+      [postPdf.SUCCESS]: (state, { payload, meta }) => {
+         return {
+            status: 'success',
+            data: payload.response
+         };
+      },
+      [postPdf.FAILURE]: (state, { payload, meta }) => {
+         return {
+            status: 'fail',
+            error: payload
+         };
+      }
+   }
 });
-
-export const example_action = createAction('EXAMPLE_ACTION');
 
 export default slice.reducer;

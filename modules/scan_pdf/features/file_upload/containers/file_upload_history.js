@@ -5,6 +5,7 @@ import { useDispatch } from 'react-redux';
 import axios from 'axios';
 import { Upload } from 'antd';
 import { ScanPdfHistoryStyles } from '../components/file_upload_styles';
+import { postPdf } from '../reducer';
 
 const { Dragger } = Upload;
 
@@ -21,7 +22,7 @@ function ScanPdfHistory({ next, setFile }) {
       showUploadList: false,
       beforeUpload: () => false,
       onChange(info) {
-         // dispatch(postPdf(info.file));
+         dispatch(postPdf(info.file));
          setFile(info.file);
          next();
          // history.push({ pathname: '/scan-pdf/preview', file: info.file });

@@ -14,6 +14,7 @@
                     "@core": "./modules/core",
                     "@scan_pdf": "./modules/scan_pdf",
                     "@search_engine": "./modules/search_engine",
+                    "@util": "./modules/util",
                     "images": ["./public/images"]
                 }
             }
