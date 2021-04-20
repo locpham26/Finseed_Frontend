@@ -1,6 +1,5 @@
 import { Button, message, notification, Spin, Steps, Upload } from 'antd';
 import React, { useEffect, useState } from 'react';
-// import { useHistory } from 'react-router-dom';
 import { io } from 'socket.io-client';
 import { useSelector, useDispatch } from 'react-redux';
 // import ThePageHeader from '../base/ThePageHeader';
@@ -8,7 +7,9 @@ import { useSelector, useDispatch } from 'react-redux';
 // import ScanPdfPreview from './ScanPdfPreview';
 // import ScanPdfEdit from './ScanPdfEdit';
 import { DOMAIN } from 'constants';
-import { ScanContainerBodyStyles, ScanContainerStyles } from '../components/file_upload_styles';
+import ThePageHeader from '@core/ThePageHeader';
+import { CaretRightOutlined } from '@ant-design/icons';
+import { ScanContainerBodyStyles, ScanContainerStyles, StyledDesc } from '../components/file_upload_styles';
 import ScanPdfHistory from './file_upload_history';
 import ScanPdfPreview from './file_upload_preview';
 import ScanPdfEdit from './file_upload_edit';
@@ -83,6 +84,23 @@ function ScanPdfLayout() {
 
    return (
       <ScanContainerStyles>
+         <ThePageHeader
+            title="Search Engine"
+            desc={
+               <StyledDesc>
+                  <p className="desc-title">Search Engine là gì?</p>
+                  <p className="desc-text">
+                     <CaretRightOutlined />
+                     Công cụ tìm kiếm dữ liệu tài chính bao gồm dữ liệu vĩ mô, ngành, doanh nghiệp và thị trường.
+                  </p>
+                  <p className="desc-text">
+                     <CaretRightOutlined />
+                     Dữ liệu được tổng hợp đa dạng từ nhiều nguồn thông tin, có độ chính xác cao, cập nhật liên tục,
+                     được xử lí thành các dạng trực quan như biểu đồ, chỉ số.
+                  </p>
+               </StyledDesc>
+            }
+         />
          <Steps current={current} onChange={onChange}>
             {steps.map((item, i) => (
                <Step key={item.title} title={item.title} disabled={i > current} />
