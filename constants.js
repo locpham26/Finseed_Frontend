@@ -1,1 +1,1 @@
-export const DOMAIN = 'http://home.giangthom.org:5001';
+export const DOMAIN = 'https://home.giangthom.org';

@@ -19,7 +19,7 @@ export const asyncScanPdf = (type) => {
       form.append('file', input);
 
       return axios
-         .post(`${DOMAIN}/api/v1/scan_file`, form, {
+         .post(`${DOMAIN}/api/scan_file`, form, {
             headers: { 'Content-Type': '*', 'Access-Control-Allow-Origin': '*' }
          })
          .then((response) => {
@@ -53,7 +53,7 @@ export const asyncGetData = (type) => {
       dispatch(actions[TYPE_START](input));
 
       return axios
-         .get(`${DOMAIN}/api/v1/result/${input}`, {
+         .get(`${DOMAIN}/api/result/${input}`, {
             headers: { 'Content-Type': '*', 'Access-Control-Allow-Origin': '*' }
          })
          .then((response) => {
