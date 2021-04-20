@@ -183,3 +183,20 @@ export const ScanPdfHistoryStyles = styled.div`
    color: #fff;
    height: 80%;
 `;
+
+export const StyledDesc = styled.div`
+   .desc-title {
+      font-size: 16px;
+      color: black;
+      font-family: 'Roboto', sans-serif;
+      font-weight: 400;
+      box-sizing: border-box;
+      margin-bottom: 20px;
+   }
+   .desc-text {
+      font-size: 12px;
+      color: black;
+      font-family: 'Roboto', sans-serif;
+      font-weight: 400;
+   }
+`;

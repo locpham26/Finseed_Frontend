@@ -1,15 +1,15 @@
 import { createSlice } from '@reduxjs/toolkit';
 // eslint-disable-next-line import/no-unresolved
-import { asyncScanActions } from '@util/utilScan';
+import { asyncGetData, asyncScanPdf } from '@util/utilScan';
 
 const initialState = {
    getDownload: {},
    postPdf: {}
 };
 
-export const postPdf = asyncScanActions('PDF_POST_FILE');
+export const postPdf = asyncScanPdf('PDF_POST_FILE');
 
-const slice = createSlice({
+export const slice = createSlice({
    name: 'upload',
    initialState,
    reducers: {},
@@ -29,6 +29,34 @@ const slice = createSlice({
          return {
             status: 'fail',
             error: payload
+         };
+      }
+   }
+});
+
+export const getData = asyncGetData('GET_DATA');
+
+export const getDataSlice = createSlice({
+   name: 'getData',
+   initialState,
+   reducers: {},
+   extraReducers: {
+      [getData.START]: (state, { payload, meta }) => {
+         return {
+            status: 'started'
+         };
+      },
+      [getData.SUCCESS]: (state, { payload, meta }) => {
+         return {
+            status: 'success',
+            data: payload.response.data,
+            message: payload.response.message
+         };
+      },
+      [getData.FAILURE]: (state, { payload, meta }) => {
+         return {
+            status: 'fail',
+            message: payload.response.message
          };
       }
    }

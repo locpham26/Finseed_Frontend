@@ -11,14 +11,16 @@ import {
    ProfileOutlined,
    UndoOutlined
 } from '@ant-design/icons';
+import { useSelector } from 'react-redux';
 import ScanPdfExcel from '../components/file_upload_excel';
 
 pdfjs.GlobalWorkerOptions.workerSrc = `https://cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.js`;
 
-function ScanPdfEdit({ scanData, file }) {
+function ScanPdfEdit({ file }) {
    const [loading, setLoading] = useState(true);
    const [numPages, setNumPages] = useState(1);
    const [pageNumber, setPageNumber] = useState(1);
+   const { data: scanData } = useSelector((state) => state.scanPdf.getData);
 
    const onDocumentLoadSuccess = ({ numPages }) => {
       setNumPages(numPages);
@@ -71,7 +73,7 @@ function ScanPdfEdit({ scanData, file }) {
                   className="dp-center"
                />
             </Col>
-            <ScanPdfExcel loading={loading} scanData={scanData} />
+            <ScanPdfExcel scanData={scanData} />
          </Row>
       </ScanPdfEditStyles>
    );

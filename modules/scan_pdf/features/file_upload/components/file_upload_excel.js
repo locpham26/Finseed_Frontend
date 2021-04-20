@@ -14,13 +14,12 @@ import Grid, {
    Selection
 } from '@rowsncolumns/grid';
 import { Rect, Text, Group, RegularPolygon } from 'react-konva';
-import { DownloadOutlined, ProfileOutlined, UndoOutlined } from '@ant-design/icons';
-import sampleData from './sample.json';
+import { UndoOutlined } from '@ant-design/icons';
 // import downloadExcel from './downloadExcel';
 
-const ScanPdfExcel = ({ loading, scanData }) => {
+const ScanPdfExcel = ({ scanData }) => {
    // const width = 500;
-   const [data, setData] = useState(scanData[1]);
+   const [data, setData] = useState(scanData[0]);
    const [page, setPage] = useState(1);
    const [width, setWidth] = useState(window.innerWidth - 500);
    // const [height, setHeight] = useState(500)
@@ -41,7 +40,7 @@ const ScanPdfExcel = ({ loading, scanData }) => {
 
    const onChangePagination = (e) => {
       setPage(e);
-      setData(scanData[e]);
+      setData(scanData[e - 1]);
    };
 
    const SelectEditor = (props) => {
@@ -75,12 +74,13 @@ const ScanPdfExcel = ({ loading, scanData }) => {
    const App = () => {
       const originalData = {};
       Object.keys(scanData).forEach((key) => (originalData[key] = JSON.parse(JSON.stringify(scanData[key]))));
+
       const rowCount = 200;
       const columnCount = 200;
       const gridRef = useRef(null);
       const getCellValue = useCallback(
          ({ rowIndex, columnIndex }) => {
-            if (data[columnIndex]) return data[columnIndex][rowIndex];
+            if (data[rowIndex]) return data[rowIndex][columnIndex];
             return '';
          },
          [data]
@@ -178,63 +178,58 @@ const ScanPdfExcel = ({ loading, scanData }) => {
          }
       });
       return (
-         <>
-            {!loading && (
-               <Col>
-                  <div className="scan-pdf-edit-header">Bản trích xuất</div>
-                  <div style={{ position: 'relative' }}>
-                     <Grid
-                        width={width}
-                        height={height}
-                        columnCount={200}
-                        rowCount={200}
-                        ref={gridRef}
-                        activeCell={activeCell}
-                        selections={selections}
-                        columnWidth={(index) => {
-                           return 100;
-                        }}
-                        showFillHandle={!isEditInProgress}
-                        itemRenderer={(props) => (
-                           <DefaultCell
-                              value={data && data[props.rowIndex] ? data[props.rowIndex][props.columnIndex] : ''}
-                              align="left"
-                              {...props}
-                           />
-                        )}
-                        rowHeight={(index) => {
-                           return 20;
-                        }}
-                        {...selectionProps}
-                        {...editableProps}
-                        {...autoSizerProps}
-                        onKeyDown={(...args) => {
-                           selectionProps.onKeyDown(...args);
-                           editableProps.onKeyDown(...args);
-                        }}
-                        onMouseDown={(...args) => {
-                           selectionProps.onMouseDown(...args);
-                           editableProps.onMouseDown(...args);
-                        }}
+         <Col>
+            <div className="scan-pdf-edit-header">Bản trích xuất</div>
+            <div style={{ position: 'relative' }}>
+               <Grid
+                  width={width}
+                  height={height}
+                  columnCount={200}
+                  rowCount={200}
+                  ref={gridRef}
+                  activeCell={activeCell}
+                  selections={selections}
+                  columnWidth={(index) => {
+                     return 100;
+                  }}
+                  showFillHandle={!isEditInProgress}
+                  itemRenderer={(props) => (
+                     <DefaultCell
+                        value={data && data[props.rowIndex] ? data[props.rowIndex][props.columnIndex] : ''}
+                        align="left"
+                        {...props}
                      />
-                     {editorComponent}
-                  </div>
-                  <Pagination
-                     defaultCurrent={page}
-                     // total={Object.keys(scanData).length}
-                     total={7}
-                     pageSize={1}
-                     onChange={(e) => onChangePagination(e)}
-                     className="dp-center"
-                  />
-                  <div className="toolbox-row">
-                     <Button type="primary" onClick={() => setData(originalData)}>
-                        <UndoOutlined />
-                     </Button>
-                  </div>
-               </Col>
-            )}
-         </>
+                  )}
+                  rowHeight={(index) => {
+                     return 20;
+                  }}
+                  {...selectionProps}
+                  {...editableProps}
+                  {...autoSizerProps}
+                  onKeyDown={(...args) => {
+                     selectionProps.onKeyDown(...args);
+                     editableProps.onKeyDown(...args);
+                  }}
+                  onMouseDown={(...args) => {
+                     selectionProps.onMouseDown(...args);
+                     editableProps.onMouseDown(...args);
+                  }}
+               />
+               {editorComponent}
+            </div>
+            <Pagination
+               defaultCurrent={page}
+               total={Object.keys(scanData).length}
+               pageSize={1}
+               onChange={(e) => onChangePagination(e)}
+               className="dp-center"
+            />
+            <div className="toolbox-row">
+               <Button type="primary" onClick={() => setData(originalData[page - 1])}>
+                  <UndoOutlined />
+               </Button>
+            </div>
+         </Col>
       );
    };
 

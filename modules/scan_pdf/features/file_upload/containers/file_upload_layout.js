@@ -2,7 +2,7 @@ import { Button, message, notification, Spin, Steps, Upload } from 'antd';
 import React, { useEffect, useState } from 'react';
 // import { useHistory } from 'react-router-dom';
 import { io } from 'socket.io-client';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 // import ThePageHeader from '../base/ThePageHeader';
 // import ScanPdfHistory from './ScanPdfHistory';
 // import ScanPdfPreview from './ScanPdfPreview';
@@ -13,7 +13,7 @@ import ScanPdfHistory from './file_upload_history';
 import ScanPdfPreview from './file_upload_preview';
 import ScanPdfEdit from './file_upload_edit';
 // import rowToCol from '../../utils/rowToCol';
-import sampleData from '../components/sample.json';
+import { getData } from '../reducer';
 
 const { Step } = Steps;
 
@@ -35,8 +35,9 @@ const steps = [
 function ScanPdfLayout() {
    const [current, setCurrent] = useState(0);
    const [loading, setLoading] = useState(false);
-   const [scanData, setScanData] = useState(sampleData);
    const [file, setFile] = useState();
+   const [socket, setSocket] = useState();
+   const dispatch = useDispatch();
 
    const next = () => {
       setCurrent(current + 1);
@@ -49,29 +50,36 @@ function ScanPdfLayout() {
    const onChange = (cur) => {
       setCurrent(cur);
    };
+   const uploadStatus = useSelector((state) => state.scanPdf.postPdf.status);
+   const fileId = useSelector((state) => state.scanPdf.postPdf.data?.file_id);
 
-   // const { status: uploadStatus, data } = useSelector((state) => state.scanPdfReducers.postPdfReducer);
+   useEffect(() => {
+      if (uploadStatus === 'started') {
+         setLoading(true);
+      } else {
+         setLoading(false);
+      }
+   }, [uploadStatus]);
 
-   // useEffect(() => {
-   //    if (uploadStatus === 'started') {
-   //       setLoading(true);
-   //    } else if (uploadStatus === 'success') {
-   //       const socket = io.connect(`${DOMAIN}?file_id=${data.file_id}`);
-   //       socket.on('status-update', (data) => {
-   //          if (['DONE', 'CONVERT_ERROR', 'SCAN_ERROR', 'CONVERT_JSON_ERROR'].includes(data.msg)) {
-   //             setLoading(false);
-   //          }
-   //          if (['CONVERT_ERROR', 'SCAN_ERROR', 'CONVERT_JSON_ERROR'].includes(data.msg)) {
-   //             notification.error({ message: 'Lỗi', description: data.msg });
-   //             socket.disconnect();
-   //          }
-   //       });
-   //       socket.on('data', (data) => {
-   //          setScanData(data.data);
-   //          socket.disconnect();
-   //       });
-   //    }
-   // }, [uploadStatus]);
+   useEffect(() => {
+      setSocket(io.connect(`${DOMAIN}`));
+   }, []);
+
+   useEffect(() => {
+      if (fileId) {
+         socket.emit('subscribe', { file_id: fileId });
+         setLoading(true);
+         socket.on('status', (res) => {
+            const { msg } = res;
+            if (['CONVERT_ERROR', 'SCAN_ERROR', 'DONE'].includes(msg)) {
+               setLoading(false);
+            }
+            if (msg === 'DONE') {
+               dispatch(getData(fileId));
+            }
+         });
+      }
+   }, [fileId]);
 
    return (
       <ScanContainerStyles>
@@ -83,25 +91,29 @@ function ScanPdfLayout() {
          {current === 0 && <ScanPdfHistory next={() => next()} setFile={setFile} />}
          <ScanContainerBodyStyles>
             {current === 1 && <ScanPdfPreview file={file} />}
-            {/* {current === 2 && (loading ? <Spin /> : <ScanPdfEdit scanData={scanData} />)} */}
-            {current === 2 && <ScanPdfEdit scanData={scanData} file={file} />}
+            {current === 2 && <ScanPdfEdit file={file} />}
          </ScanContainerBodyStyles>
          <div className="dp-space-bw" style={{ marginTop: 16 }}>
-            {/* {current > 0 && ( */}
-            <Button
-               style={{
-                  margin: '0 8px',
-                  opacity: current > 0 ? '1' : '0',
-                  cursor: current > 0 ? 'all' : 'default'
-               }}
-               onClick={() => prev()}
-            >
-               Quay lại
-            </Button>
-            {/* )} */}
-            {current < steps.length - 1 && current > 0 && (
+            {current > 0 && (
+               <Button
+                  style={{
+                     margin: '0 8px',
+                     opacity: current > 0 ? '1' : '0',
+                     cursor: current > 0 ? 'all' : 'default'
+                  }}
+                  onClick={() => prev()}
+               >
+                  Quay lại
+               </Button>
+            )}
+            {!loading && current < steps.length - 1 && current > 0 && (
                <Button type="primary" onClick={() => next()}>
                   Tiếp
+               </Button>
+            )}
+            {loading && current === 1 && (
+               <Button type="primary" size="small" loading>
+                  Loading
                </Button>
             )}
             {/* {current === steps.length - 1 && (
