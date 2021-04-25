@@ -1,17 +1,29 @@
 import React, { useState } from 'react';
-import styled from 'styled-components';
-import { palette } from 'styled-theme';
-// import { ReactComponent as SearchIcon } from '../../assets/images/search.svg';
-// import { ReactComponent as ClockIcon } from '../../assets/images/clock.svg';
 import { AutoComplete, Tooltip, Input } from 'antd';
 import { InfoCircleOutlined, SearchOutlined } from '@ant-design/icons';
+import SearchAutoCompleteItem from '../components/search_autocomplete_item';
 
-const historyItem = <div>Yooooo</div>;
-
-const options = [
-  { label: historyItem, value: '2' },
-  { label: historyItem, value: '1' }
+const historyList = [
+  { key: 'h1', value: 'GDP Viet Nam nam 2020' },
+  { key: 'h2', value: 'Tang truong cac nganh cong nghiep' }
 ];
+
+const suggestionList = [
+  { key: 's1', value: 'GDP Viet Nam qua cac nam' },
+  { key: 's2', value: 'Tang truong GDP' }
+];
+
+const options = historyList
+  .map((historyItem) => ({
+    label: <SearchAutoCompleteItem isHistory itemData={historyItem.value} />,
+    value: historyItem.value
+  }))
+  .concat(
+    suggestionList.map((suggestionItem) => ({
+      label: <SearchAutoCompleteItem isHistory={false} itemData={suggestionItem.value} />,
+      value: suggestionItem.value
+    }))
+  );
 
 function SearchInputBar(props) {
   return (

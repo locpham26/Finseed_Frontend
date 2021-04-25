@@ -63,7 +63,7 @@ theme.palette = {
     'linear-gradient(90deg, rgba(0,247,167,1) 0%, rgba(4,245,237,1) 100%)',
     'linear-gradient(90deg, rgba(17,215,151,1) 0%, rgba(14,209,203,1) 100%)'
   ],
-  darkGrayScale: ['#1C1C1F', '#252529', '#3A3B3C'],
+  darkGrayScale: ['#1C1C1F', '#252529', '#3A3B3C', '#818182'],
   darkGreen: ['#11d797', '#0ed1cb', 'rgba(125,245,241,0.7)']
 };
 

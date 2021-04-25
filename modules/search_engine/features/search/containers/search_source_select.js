@@ -13,7 +13,7 @@ function SourceSelect(props) {
   const [selectedSources, setSelectedSources] = useState(['all']);
 
   const handleChange = (value) => {
-    setSelectedSources(...value);
+    setSelectedSources([...value]);
   };
   return (
     <Select
@@ -22,6 +22,7 @@ function SourceSelect(props) {
       allowClear={false}
       style={{ width: '100%' }}
       placeholder="Chọn nguồn"
+      value={selectedSources}
       getPopupContainer={(trigger) => trigger.parentNode}
       onChange={handleChange}
     >
