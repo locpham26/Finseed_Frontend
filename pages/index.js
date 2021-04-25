@@ -4,10 +4,10 @@ import { withRouter } from 'next/router';
 import styles from '../styles/Home.module.css';
 
 const Home = ({ router }) => {
-   React.useEffect(() => {
-      router.push('/search');
-   });
-   return null;
+  React.useEffect(() => {
+    router.push('/search-engine');
+  });
+  return null;
 };
 
 export default withRouter(Home);
