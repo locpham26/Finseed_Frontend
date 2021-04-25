@@ -1,12 +1,12 @@
 import styled from 'styled-components';
 import { palette } from 'styled-theme';
 
-export const SearchStylesContainer = styled.div`
-  /**
+/**
   styles for components in search page
   @author: Loc Pham
   */
 
+export const SearchStylesContainer = styled.div`
   /* source-select */
   .ant-select.fs-search {
     border-radius: 5px;
@@ -126,5 +126,74 @@ export const AutocompleteItemWrapper = styled.div`
   }
   .history-item {
     color: ${palette('darkGreen', 0)};
+  }
+`;
+
+export const SearchTableWrapper = styled.table`
+  width: 100%;
+  border: none;
+  border-collapse: collapse;
+  background-color: transparent;
+  th {
+    border: none;
+    padding: 5px 10px;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 500;
+    font-size: 14px;
+    height: 40px;
+    color: #818189;
+    background-color: transparent;
+  }
+  tr {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    color: #5848f6;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+  }
+  td {
+    padding: 5px 10px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    cursor: auto !important;
+  }
+
+  tbody tr {
+    height: 60px;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 400;
+    font-size: 14px;
+    color: white;
+    background-color: transparent;
+  }
+  thead > tr {
+    background-color: transparent;
+  }
+`;
+
+export const SearchCardWrapper = styled.div`
+  .search-card-head {
+    min-height: 60px;
+    padding: 20px;
+    font-size: 18px;
+    display: flex;
+    align-items: center;
+    color: white !important;
+    background-color: ${palette('darkGrayScale', 1)};
+    margin-bottom: 5px;
+    border-radius: 5px 5px 0px 0px;
+    &:hover {
+      a {
+        color: ${palette('darkGreen', 0)} !important;
+      }
+    }
+  }
+  .search-card-body {
+    user-select: none;
+    background-color: ${palette('darkGrayScale', 1)};
+    border-radius: 0px 0px 5px 5px;
+    padding: 20px;
+    margin-bottom: 30px;
   }
 `;
