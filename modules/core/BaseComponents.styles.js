@@ -20,7 +20,7 @@ export const LoginButton = styled(Button)`
   }
 `;
 
-export const StyledLogoContainer = styled.div`
+export const StyledLogoContainer = styled.a`
   width: 60px;
   height: 50px;
   cursor: pointer;

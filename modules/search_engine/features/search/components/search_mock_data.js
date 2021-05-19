@@ -55,8 +55,12 @@ export const searchDataList = [
         ['Quý', 'Thuộc Tính', 'Giá trị', 'Đơn vị', 'Khu vực', 'Nguồn'],
         ['Q1/2019', 'Tăng trưởng GDP', '2.68', '%', 'Việt Nam', 'GSO'],
         ['Q2/2019', 'Tăng trưởng GDP', '0.39', '%', 'Việt Nam', 'GSO'],
-        ['Q3/2019', 'Tăng trưởng GDP', '2.69', '%', 'Việt Nam', 'GSO'],
-        ['Q4/2019', 'Tăng trưởng GDP', '4.48', '%', 'Việt Nam', 'GSO']
+        ['Q3/2019', 'Tăng trưởng GDP1', '2.69', '%', 'Việt Nam', 'GSO'],
+        ['Q4/2019', 'Tăng trưởng GDP2', '4.48', '%', 'Việt Nam', 'GSO'],
+        ['Q1/2019', 'Tăng trưởng GDP', '2.68', '%', 'Việt Nam', 'GSO1'],
+        ['Q2/2019', 'Tăng trưởng GDP', '0.39', '%', 'Việt Nam', 'GSO1'],
+        ['Q3/2019', 'Tăng trưởng GDP', '2.69', '%', 'Việt Nam', 'GSO2'],
+        ['Q4/2019', 'Tăng trưởng GDP', '4.48', '%', 'Việt Nam', 'GSO2']
       ],
       chartType: [
         { key: 'bar', label: 'cột' },
