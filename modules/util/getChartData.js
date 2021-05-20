@@ -12,7 +12,6 @@ export const getDataByField = (data, fieldIndex) => {
       lastSlice = i + 1;
     }
   }
-  console.log(dataObj);
   return dataObj;
 };
 
@@ -42,7 +41,7 @@ export const getDataByTime = (data) => {
 export const getLineData = (data, source) => {
   const dataBySource = getDataBySource(data);
   const dataObj = getDataByProperty(dataBySource[source]);
-  const lineObj = Object.entries(dataObj).map(([key, value]) => {
+  return Object.entries(dataObj).map(([key, value]) => {
     const id = key;
     const data = value
       .map((row) => ({
@@ -55,22 +54,31 @@ export const getLineData = (data, source) => {
       data
     };
   });
-  return lineObj;
 };
 
-const getColumnData = (data, source) => {
+export const getColumnData = (data, source) => {
   const dataBySource = getDataBySource(data);
   const dataObj = getDataByTime(dataBySource[source]);
-  const columnObj = Object.entries(dataObj).map(([key, value]) => {
-    value.map((row) => {
-      const obj = {};
-      const prop = row[propertyIndex];
-      const value = row[valueIndex];
-      obj[prop] = value;
-      return obj;
+  return Object.entries(dataObj).map(([key, value]) => {
+    const temp = {};
+    value.forEach((row) => {
+      temp[row[propertyIndex]] = parseFloat(row[valueIndex]);
     });
     return {
-      time: key
+      time: key,
+      ...temp
+    };
+  });
+};
+
+export const getPieData = (data, source) => {
+  const dataBySource = getDataBySource(data);
+  const dataObj = getDataByProperty(dataBySource[source]);
+  return Object.entries(dataObj).map(([key, value]) => {
+    return {
+      id: key,
+      label: key,
+      value: parseFloat(value[0][valueIndex])
     };
   });
 };

@@ -2,9 +2,9 @@ import React from 'react';
 import Link from 'next/link';
 import { SearchCardWrapper } from './search_styles_container';
 
-function SearchDataCard({ cardHead, cardBody, searchId }) {
+function SearchDataCard({ cardHead, cardBody, searchId, height }) {
   return (
-    <SearchCardWrapper>
+    <SearchCardWrapper height={height}>
       <div className="search-card-head">
         <Link href={`/search-engine/${searchId}`}>{cardHead}</Link>
       </div>

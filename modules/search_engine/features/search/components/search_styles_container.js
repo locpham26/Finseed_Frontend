@@ -173,8 +173,9 @@ export const SearchTableWrapper = styled.table`
 `;
 
 export const SearchCardWrapper = styled.div`
+  width: 100%;
   .search-card-head {
-    min-height: 60px;
+    height: 60px;
     padding: 20px;
     font-size: 18px;
     display: flex;
@@ -195,5 +196,7 @@ export const SearchCardWrapper = styled.div`
     border-radius: 0px 0px 5px 5px;
     padding: 20px;
     margin-bottom: 30px;
+    min-height: 400px;
+    height: ${(props) => props.height};
   }
 `;
