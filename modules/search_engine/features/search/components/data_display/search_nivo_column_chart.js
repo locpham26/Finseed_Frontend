@@ -1,11 +1,11 @@
 import React, { useEffect } from 'react';
 import { ResponsiveBar } from '@nivo/bar';
-import { getColumnData, getDataSources } from '../../../../../util/getChartData';
+import { getChartData, getDataSources } from '../../../../../util/getChartData';
 
 const MyResponsiveBar = ({ data, source }) => {
   const sources = getDataSources(data);
   const chosenSource = source || sources[0];
-  const columnData = getColumnData(data, chosenSource);
+  const { chartData: columnData, unit, maxValue, minValue } = getChartData(data, chosenSource, 'column');
   const indexBy = Object.keys(columnData[0])[0];
   const keys = Object.keys(columnData[0]).slice(1, Object.keys(columnData[0]).length);
   return (
@@ -22,8 +22,6 @@ const MyResponsiveBar = ({ data, source }) => {
           }
         }
       }}
-      // height={300}
-      // width={600}
       keys={keys}
       indexBy={indexBy}
       margin={{ top: 50, right: 0, bottom: 50, left: 50 }}
@@ -73,7 +71,7 @@ const MyResponsiveBar = ({ data, source }) => {
         tickSize: 0,
         tickPadding: 5,
         tickRotation: 0,
-        legend: 'country',
+        legend: 'Thời gian',
         legendPosition: 'middle',
         legendOffset: 32
       }}
@@ -81,7 +79,7 @@ const MyResponsiveBar = ({ data, source }) => {
         tickSize: 0,
         tickPadding: 5,
         tickRotation: 0,
-        legend: 'food',
+        legend: unit,
         legendPosition: 'middle',
         legendOffset: -40
       }}

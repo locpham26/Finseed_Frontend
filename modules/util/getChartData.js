@@ -1,6 +1,7 @@
 const timeIndex = 0;
 const propertyIndex = 1;
 const valueIndex = 2;
+const unitIndex = 3;
 const sourceIndex = 5;
 
 export const getDataByField = (data, fieldIndex) => {
@@ -12,6 +13,7 @@ export const getDataByField = (data, fieldIndex) => {
       lastSlice = i + 1;
     }
   }
+  console.log(dataObj);
   return dataObj;
 };
 
@@ -38,9 +40,7 @@ export const getDataByTime = (data) => {
   return getDataByField(data, timeIndex);
 };
 
-export const getLineData = (data, source) => {
-  const dataBySource = getDataBySource(data);
-  const dataObj = getDataByProperty(dataBySource[source]);
+export const getLineData = (dataObj) => {
   return Object.entries(dataObj).map(([key, value]) => {
     const id = key;
     const data = value
@@ -56,9 +56,7 @@ export const getLineData = (data, source) => {
   });
 };
 
-export const getColumnData = (data, source) => {
-  const dataBySource = getDataBySource(data);
-  const dataObj = getDataByTime(dataBySource[source]);
+export const getColumnData = (dataObj) => {
   return Object.entries(dataObj).map(([key, value]) => {
     const temp = {};
     value.forEach((row) => {
@@ -71,14 +69,49 @@ export const getColumnData = (data, source) => {
   });
 };
 
-export const getPieData = (data, source) => {
-  const dataBySource = getDataBySource(data);
-  const dataObj = getDataByProperty(dataBySource[source]);
-  return Object.entries(dataObj).map(([key, value]) => {
-    return {
-      id: key,
-      label: key,
-      value: parseFloat(value[0][valueIndex])
-    };
+export const getPieData = (dataObj) => {
+  return Object.entries(dataObj).map(([key, value]) => ({
+    id: key,
+    label: key,
+    value: parseFloat(value[0][valueIndex])
+  }));
+};
+
+export const getUnit = (data) => {
+  return data[0][unitIndex];
+};
+
+export const getMaxValue = (dataObj) => {
+  const valueArray = [];
+  Object.entries(dataObj).forEach(([_, value]) => {
+    value.forEach((row) => {
+      valueArray.push(parseFloat(row[valueIndex]));
+    });
   });
+  return {
+    maxValue: Math.max(...valueArray),
+    minValue: Math.min(...valueArray)
+  };
+};
+
+export const getChartData = (data, source, type) => {
+  const dataBySource = getDataBySource(data);
+  const dataObj = type !== 'column' ? getDataByProperty(dataBySource[source]) : getDataByTime(dataBySource[source]);
+  let chartData;
+  switch (type) {
+    case 'column':
+      chartData = getColumnData(dataObj, source);
+      break;
+    case 'pie':
+      chartData = getPieData(dataObj, source);
+      break;
+    default:
+      chartData = getLineData(dataObj, source);
+      break;
+  }
+  return {
+    unit: getUnit(data),
+    chartData,
+    ...getMaxValue(dataObj)
+  };
 };

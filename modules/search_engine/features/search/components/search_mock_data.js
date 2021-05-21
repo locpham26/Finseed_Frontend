@@ -80,5 +80,34 @@ export const searchDataList = [
       ],
       chartType: [{ key: 'pie', label: 'tròn' }]
     }
+  },
+  {
+    id: 4,
+    question: 'Giá các loại sợi tại thị trường Trung Quốc',
+    answer: {
+      data: [
+        ['Ngày', 'Thuộc tính', 'Giá trị', 'Đơn vị', 'Khu vực', 'Nguồn'],
+        ['4/3/2021', 'Cotton 21S', '24350', 'RMB/tấn', 'Trung Quốc', 'Sunsirs'],
+        ['3/3/2021', 'Cotton 21S', '24350', 'RMB/tấn', 'Trung Quốc', 'Sunsirs'],
+        ['2/3/2021', 'Cotton 21S', '24350', 'RMB/tấn', 'Trung Quốc', 'Sunsirs'],
+        ['1/3/2021', 'Cotton 21S', '24350', 'RMB/tấn', 'Trung Quốc', 'Sunsirs'],
+        ['28/2/2021', 'Cotton 21S', '24025', 'RMB/tấn', 'Trung Quốc', 'Sunsirs'],
+        ['4/3/2021', 'Cotton 32S', '25475', 'RMB/tấn', 'Trung Quốc', 'Sunsirs'],
+        ['3/3/2021', 'Cotton 32S', '25475', 'RMB/tấn', 'Trung Quốc', 'Sunsirs'],
+        ['2/3/2021', 'Cotton 32S', '25475', 'RMB/tấn', 'Trung Quốc', 'Sunsirs'],
+        ['1/3/2021', 'Cotton 32S', '25475', 'RMB/tấn', 'Trung Quốc', 'Sunsirs'],
+        ['28/2/2021', 'Cotton 32S', '25150', 'RMB/tấn', 'Trung Quốc', 'Sunsirs'],
+        ['4/3/2021', 'Sợi Rayon', '19625', 'RMB/tấn', 'Trung Quốc', 'Sunsirs'],
+        ['3/3/2021', 'Sợi Rayon', '19625', 'RMB/tấn', 'Trung Quốc', 'Sunsirs'],
+        ['2/3/2021', 'Sợi Rayon', '19625', 'RMB/tấn', 'Trung Quốc', 'Sunsirs'],
+        ['1/3/2021', 'Sợi Rayon', '19450', 'RMB/tấn', 'Trung Quốc', 'Sunsirs'],
+        ['28/2/2021', 'Sợi Rayon', '19450', 'RMB/tấn', 'Trung Quốc', 'Sunsirs'],
+        ['4/3/2021', 'Sợi Polyeste', '14666', 'RMB/tấn', 'Trung Quốc', 'Sunsirs'],
+        ['3/3/2021', 'Sợi Polyeste', '14766', 'RMB/tấn', 'Trung Quốc', 'Sunsirs'],
+        ['2/3/2021', 'Sợi Polyeste', '14766', 'RMB/tấn', 'Trung Quốc', 'Sunsirs'],
+        ['1/3/2021', 'Sợi Polyeste', '14766', 'RMB/tấn', 'Trung Quốc', 'Sunsirs'],
+        ['28/2/2021', 'Sợi Polyeste', '14933', 'RMB/tấn', 'Trung Quốc', 'Sunsirs']
+      ]
+    }
   }
 ];

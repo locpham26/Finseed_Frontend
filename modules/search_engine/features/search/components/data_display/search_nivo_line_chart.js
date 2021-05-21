@@ -1,6 +1,6 @@
 import React from 'react';
 import { ResponsiveLine } from '@nivo/line';
-import { getLineData, getDataSources } from '../../../../../util/getChartData';
+import { getChartData, getDataSources } from '../../../../../util/getChartData';
 // make sure parent container have a defined height when using
 // responsive component, otherwise height will be 0 and
 // no chart will be rendered.
@@ -10,7 +10,7 @@ import { getLineData, getDataSources } from '../../../../../util/getChartData';
 const MyResponsiveLine = ({ data, source }) => {
   const sources = getDataSources(data);
   const chosenSource = source || sources[0];
-  const lineData = getLineData(data, chosenSource);
+  const { chartData: lineData, unit, maxValue, minValue } = getChartData(data, chosenSource, 'line');
   return (
     <ResponsiveLine
       data={lineData}
@@ -23,17 +23,21 @@ const MyResponsiveLine = ({ data, source }) => {
               strokeWidth: 2
             }
           }
+        },
+        crosshair: {
+          line: {
+            stroke: '#ffffff'
+          }
         }
       }}
-      // height={300}
-      // width={'80%'}
-      margin={{ top: 50, right: 110, bottom: 50, left: 60 }}
+      margin={{ top: 50, right: 50, bottom: 50, left: 80 }}
       curve="cardinal"
       colors={['#28E59C', '#5848F6', '#F6B767', '#ED3B5B']}
       enableGridX={false}
       xScale={{ type: 'point' }}
-      yScale={{ type: 'linear', min: 'auto', max: 'auto', stacked: true, reverse: false }}
+      yScale={{ type: 'linear', min: 0, max: 1.2 * maxValue, stacked: false, reverse: false }}
       yFormat=" >-.2f"
+      gridXValues={10}
       axisTop={null}
       axisRight={null}
       axisBottom={{
@@ -41,7 +45,7 @@ const MyResponsiveLine = ({ data, source }) => {
         tickSize: 0,
         tickPadding: 5,
         tickRotation: 0,
-        legend: 'transportation',
+        legend: 'Thời gian',
         legendOffset: 36,
         legendPosition: 'middle'
       }}
@@ -50,8 +54,8 @@ const MyResponsiveLine = ({ data, source }) => {
         tickSize: 0,
         tickPadding: 5,
         tickRotation: 0,
-        legend: 'count',
-        // legendOffset: -40,
+        legend: unit,
+        legendOffset: -60,
         legendPosition: 'middle'
       }}
       pointSize={10}
@@ -60,14 +64,15 @@ const MyResponsiveLine = ({ data, source }) => {
       pointBorderColor={{ from: 'serieColor' }}
       pointLabelYOffset={-12}
       useMesh
+      enableSlices="x"
       legends={[
         {
-          anchor: 'bottom-right',
-          direction: 'column',
+          anchor: 'top',
+          direction: 'row',
           justify: false,
-          translateX: 100,
-          translateY: 0,
-          itemsSpacing: 0,
+          translateX: 0,
+          translateY: -40,
+          itemsSpacing: 20,
           itemDirection: 'left-to-right',
           itemWidth: 80,
           itemHeight: 20,
