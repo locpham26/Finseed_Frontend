@@ -1,43 +1,19 @@
 import React from 'react';
-import { Pie } from '@nivo/pie';
-import { getPieData, getDataSources } from '../../../../../util/getChartData';
-// const data = [
-//   {
-//     id: 'make',
-//     label: 'make',
-//     value: 326
-//   },
-//   {
-//     id: 'python',
-//     label: 'python',
-//     value: 168
-//   },
-//   {
-//     id: 'erlang',
-//     label: 'erlang',
-//     value: 209
-//   },
-//   {
-//     id: 'rust',
-//     label: 'rust',
-//     value: 241
-//   }
-// ];
+import { ResponsivePie } from '@nivo/pie';
+import { getChartData, getDataSources } from '../../../../../util/getChartData';
 
 const MyResponsivePie = ({ data, source }) => {
   const sources = getDataSources(data);
   const chosenSource = source || sources[0];
-  const pieData = getPieData(data, chosenSource);
+  const { chartData: pieData, unit } = getChartData(data, chosenSource, 'pie');
   return (
-    <Pie
+    <ResponsivePie
       data={pieData}
-      width={400}
-      height={400}
       theme={{ textColor: '#ffffff' }}
       colors={['#28E59C', '#5848F6', '#F6B767', '#ED3B5B']}
-      margin={{ top: 40, right: 80, bottom: 80, left: 80 }}
-      startAngle={-127}
-      endAngle={298}
+      margin={{ top: 80, right: 80, bottom: 40, left: 80 }}
+      startAngle={0}
+      endAngle={360}
       innerRadius={0.35}
       padAngle={3}
       activeOuterRadiusOffset={8}
@@ -122,12 +98,12 @@ const MyResponsivePie = ({ data, source }) => {
       // ]}
       legends={[
         {
-          anchor: 'bottom',
+          anchor: 'top',
           direction: 'row',
           justify: false,
           translateX: 0,
-          translateY: 56,
-          itemsSpacing: 0,
+          translateY: -56,
+          itemsSpacing: 60,
           itemWidth: 100,
           itemHeight: 18,
           itemTextColor: '#999',
@@ -139,7 +115,7 @@ const MyResponsivePie = ({ data, source }) => {
             {
               on: 'hover',
               style: {
-                itemTextColor: '#000'
+                itemTextColor: '#fff'
               }
             }
           ]
