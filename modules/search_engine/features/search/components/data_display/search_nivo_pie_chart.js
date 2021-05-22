@@ -20,12 +20,26 @@ const MyResponsivePie = ({ data, source }) => {
       borderWidth={1}
       borderColor={{ from: 'color', modifiers: [['darker', 0.2]] }}
       arcLinkLabelsSkipAngle={9}
-      arcLinkLabelsTextColor={{ theme: 'labels.text.fill' }}
+      arcLinkLabelsTextColor={{
+        theme: 'labels.text.fill'
+      }}
       arcLinkLabelsThickness={2}
       arcLinkLabelsColor={{ from: 'color' }}
       arcLabelsRadiusOffset={0.6}
       arcLabelsSkipAngle={13}
-      arcLabelsTextColor={{ theme: 'labels.text.fill' }}
+      arcLabelsTextColor={{
+        theme: 'labels.text.fill'
+        // format: (v) => {
+        //   return v.length > 10 ? (
+        //     <tspan>
+        //       {v.substring(0, 10) + '...'}
+        //       <title>{v}</title>
+        //     </tspan>
+        //   ) : (
+        //     v
+        //   );
+        // }
+      }}
       // defs={[
       //   {
       //     id: 'dots',
@@ -108,14 +122,15 @@ const MyResponsivePie = ({ data, source }) => {
           itemHeight: 18,
           itemTextColor: '#999',
           itemDirection: 'left-to-right',
-          itemOpacity: 1,
-          symbolSize: 18,
-          symbolShape: 'circle',
+          itemOpacity: 0.75,
+          symbolSize: 20,
+          symbolShape: 'diamond',
           effects: [
             {
               on: 'hover',
               style: {
-                itemTextColor: '#fff'
+                itemTextColor: '#fff',
+                itemOpacity: 1
               }
             }
           ]

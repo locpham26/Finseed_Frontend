@@ -13,7 +13,6 @@ export const getDataByField = (data, fieldIndex) => {
       lastSlice = i + 1;
     }
   }
-  console.log(dataObj);
   return dataObj;
 };
 
@@ -24,7 +23,6 @@ export const getDataSources = (data) => {
       sources.push(data[i][sourceIndex]);
     }
   }
-  console.log(sources);
   return sources;
 };
 
@@ -57,6 +55,7 @@ export const getLineData = (dataObj) => {
 };
 
 export const getColumnData = (dataObj) => {
+  console.log(dataObj);
   return Object.entries(dataObj).map(([key, value]) => {
     const temp = {};
     value.forEach((row) => {

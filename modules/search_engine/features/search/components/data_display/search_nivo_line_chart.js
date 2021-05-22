@@ -30,7 +30,7 @@ const MyResponsiveLine = ({ data, source }) => {
           }
         }
       }}
-      margin={{ top: 50, right: 50, bottom: 50, left: 80 }}
+      margin={{ top: 50, right: 30, bottom: 50, left: 80 }}
       curve="cardinal"
       colors={['#28E59C', '#5848F6', '#F6B767', '#ED3B5B']}
       enableGridX={false}
@@ -77,8 +77,8 @@ const MyResponsiveLine = ({ data, source }) => {
           itemWidth: 80,
           itemHeight: 20,
           itemOpacity: 0.75,
-          symbolSize: 12,
-          symbolShape: 'circle',
+          symbolSize: 20,
+          symbolShape: 'diamond',
           symbolBorderColor: 'rgba(0, 0, 0, .5)',
           effects: [
             {

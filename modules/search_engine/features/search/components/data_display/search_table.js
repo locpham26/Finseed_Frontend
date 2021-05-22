@@ -5,24 +5,26 @@ function SearchTable({ data }) {
   const headData = data[0];
   const bodyData = data.slice(1, data.length);
   return (
-    <SearchTableWrapper>
-      <thead>
-        <tr>
-          {headData.map((col, index) => (
-            <th key={index}>{col}</th>
-          ))}
-        </tr>
-      </thead>
-      <tbody>
-        {bodyData.map((row, index) => (
-          <tr key={index}>
-            {row.map((cell, index) => (
-              <td key={index}>{cell}</td>
+    <>
+      <SearchTableWrapper>
+        <thead>
+          <tr>
+            {headData.map((col, index) => (
+              <th key={index}>{col}</th>
             ))}
           </tr>
-        ))}
-      </tbody>
-    </SearchTableWrapper>
+        </thead>
+        <tbody>
+          {bodyData.map((row, index) => (
+            <tr key={index}>
+              {row.map((cell, index) => (
+                <td key={index}>{cell}</td>
+              ))}
+            </tr>
+          ))}
+        </tbody>
+      </SearchTableWrapper>
+    </>
   );
 }
 

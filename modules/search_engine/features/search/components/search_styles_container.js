@@ -58,7 +58,7 @@ export const SearchStylesContainer = styled.div`
   .ant-select-auto-complete {
     width: 100%;
     height: 40px;
-    margin-top: 15px;
+    margin-top: 5px;
     .ant-select-selector {
       height: 100%;
       .ant-input-affix-wrapper {
@@ -129,6 +129,21 @@ export const AutocompleteItemWrapper = styled.div`
   }
 `;
 
+export const DownloadButtonWrapper = styled.div`
+  display: flex;
+  justify-content: flex-end;
+  .ant-btn {
+    background: none;
+    outline: none;
+    border: none;
+    color: white;
+    padding: 0;
+    &:hover {
+      color: ${palette('darkGreen', 0)};
+    }
+  }
+`;
+
 export const SearchTableWrapper = styled.table`
   width: 100%;
   border: none;
@@ -195,8 +210,39 @@ export const SearchCardWrapper = styled.div`
     background-color: ${palette('darkGrayScale', 1)};
     border-radius: 0px 0px 5px 5px;
     padding: 20px;
-    margin-bottom: 30px;
     min-height: 400px;
     height: ${(props) => props.height};
   }
+  .search-card-footer {
+    /* height: 60px; */
+    background-color: ${palette('darkGrayScale', 1)};
+    margin-bottom: 30px;
+    padding: 10px 20px;
+  }
+`;
+
+export const SearchAnswerTitle = styled.div`
+  height: 60px;
+  background: ${palette('darkGrayScale', 1)};
+  border-left: 5px solid ${palette('darkGreen', 0)};
+  display: flex;
+  align-items: center;
+  padding-left: 20px;
+  border-radius: 3px;
+  color: white;
+  margin-top: 24px;
+  margin-bottom: 8px;
+`;
+
+export const SearchAnswerTableWrapper = styled.div`
+  padding: 20px;
+  border-radius: 5px;
+  background: ${palette('darkGrayScale', 1)};
+`;
+export const SearchAnswerChartWrapper = styled.div`
+  padding: 10px;
+  height: 500px;
+  border-radius: 5px;
+  background: ${palette('darkGrayScale', 1)};
+  margin-bottom: 8px;
 `;

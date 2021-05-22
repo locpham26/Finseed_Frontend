@@ -6,6 +6,9 @@ const MyResponsiveBar = ({ data, source }) => {
   const sources = getDataSources(data);
   const chosenSource = source || sources[0];
   const { chartData: columnData, unit, maxValue, minValue } = getChartData(data, chosenSource, 'column');
+  useEffect(() => {
+    console.log(columnData);
+  });
   const indexBy = Object.keys(columnData[0])[0];
   const keys = Object.keys(columnData[0]).slice(1, Object.keys(columnData[0]).length);
   return (
@@ -101,6 +104,7 @@ const MyResponsiveBar = ({ data, source }) => {
           itemDirection: 'left-to-right',
           itemOpacity: 0.85,
           symbolSize: 20,
+          symbolShape: 'diamond',
           effects: [
             {
               on: 'hover',
