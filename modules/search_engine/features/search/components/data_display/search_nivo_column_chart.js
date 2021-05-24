@@ -27,7 +27,7 @@ const MyResponsiveBar = ({ data, source }) => {
       }}
       keys={keys}
       indexBy={indexBy}
-      margin={{ top: 50, right: 0, bottom: 50, left: 50 }}
+      margin={{ top: 50, right: 30, bottom: 50, left: 80 }}
       padding={0.3}
       groupMode="grouped"
       valueScale={{ type: 'linear' }}
@@ -84,7 +84,7 @@ const MyResponsiveBar = ({ data, source }) => {
         tickRotation: 0,
         legend: unit,
         legendPosition: 'middle',
-        legendOffset: -40
+        legendOffset: -60
       }}
       enableLabel={false}
       labelSkipWidth={12}

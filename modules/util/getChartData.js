@@ -35,7 +35,27 @@ export const getDataByProperty = (data) => {
 };
 
 export const getDataByTime = (data) => {
-  return getDataByField(data, timeIndex);
+  let dataObj = {};
+  let pivot = -1;
+  for (let k = 1; k < data.length; k += 1) {
+    if (data[k][timeIndex] === data[0][timeIndex]) {
+      pivot = k;
+      break;
+    }
+  }
+  if (pivot > -1) {
+    for (let i = 0; i < pivot; i += 1) {
+      dataObj[data[i][timeIndex]] = [];
+      for (let j = 0; j < data.length; j += 1) {
+        if (data[j][timeIndex] === data[i][timeIndex]) {
+          dataObj[data[i][timeIndex]].push(data[j]);
+        }
+      }
+    }
+  } else {
+    dataObj = getDataByField(data, timeIndex);
+  }
+  return dataObj;
 };
 
 export const getLineData = (dataObj) => {
