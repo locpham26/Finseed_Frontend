@@ -42,7 +42,7 @@ function MyApp({ Component, pageProps }) {
                 style={{
                   backgroundColor: '#18191A',
                   minHeight: 'calc(100vh - 50px)',
-                  padding: '20px',
+                  padding: '24px',
                   overflowY: 'auto'
                 }}
               >

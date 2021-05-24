@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { palette, fonts } from 'styled-theme';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import Logo from 'images/f.svg';
+import Logo from 'images/finseed_logo.png';
 import { StyledLogoContainer } from './BaseComponents.styles';
 
 const activeClassName = 'nav-item-active';
@@ -24,7 +24,7 @@ const WhiteLink = styled.a`
     }
   }
   .${activeClassName} {
-    background: ${palette('darkGreen', 0)} !important;
+    background: ${palette('gradient', 0)} !important;
     color: black;
   }
 `;
@@ -60,7 +60,7 @@ function NavigationMenu() {
     <>
       <Link href="/search-engine" passHref>
         <StyledLogoContainer>
-          <img src={Logo} />
+          <img height={40} src={Logo} />
         </StyledLogoContainer>
       </Link>
       <Link href="/search-engine" passHref>

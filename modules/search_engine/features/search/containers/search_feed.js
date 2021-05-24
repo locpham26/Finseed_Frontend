@@ -17,7 +17,7 @@ const fifthData = fifth.answer.data.slice(1, fifth.answer.data.length);
 
 function SearchFeed(props) {
   return (
-    <Row gutter={24} style={{ marginBottom: '25px', marginTop: '25px' }}>
+    <Row gutter={24} style={{ marginBottom: '24px', marginTop: '24px' }}>
       <Col span={15}>
         <SearchDataCard
           height="600px"

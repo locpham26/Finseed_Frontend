@@ -17,6 +17,9 @@ export const SearchStylesContainer = styled.div`
       border-radius: 5px !important;
       height: 35px;
       padding-left: 5px;
+      &:hover {
+        border-color: ${palette('darkGreen', 0)} !important;
+      }
     }
 
     .ant-select-selection-item {
@@ -27,6 +30,7 @@ export const SearchStylesContainer = styled.div`
       background: ${palette('darkGrayScale', 1)};
       padding: 5px 5px;
       border-radius: 5px;
+      box-shadow: 0px 0px 4px #999;
       .ant-select-item {
         color: white;
         &:not(:last-child) {
@@ -58,7 +62,7 @@ export const SearchStylesContainer = styled.div`
   .ant-select-auto-complete {
     width: 100%;
     height: 40px;
-    margin-top: 5px;
+    margin-top: 6px;
     .ant-select-selector {
       height: 100%;
       .ant-input-affix-wrapper {
@@ -89,6 +93,7 @@ export const SearchStylesContainer = styled.div`
       background: ${palette('darkGrayScale', 1)};
       border-radius: 5px;
       padding: 5px;
+      box-shadow: 0px 0px 4px #999;
       .ant-select-item-option {
         border-radius: 3px;
         color: white;
@@ -197,7 +202,7 @@ export const SearchCardWrapper = styled.div`
     align-items: center;
     color: white !important;
     background-color: ${palette('darkGrayScale', 1)};
-    margin-bottom: 5px;
+    margin-bottom: 6px;
     border-radius: 5px 5px 0px 0px;
     &:hover {
       a {
@@ -208,7 +213,7 @@ export const SearchCardWrapper = styled.div`
   .search-card-body {
     user-select: none;
     background-color: ${palette('darkGrayScale', 1)};
-    border-radius: 0px 0px 5px 5px;
+
     padding: 20px;
     min-height: 400px;
     height: ${(props) => props.height};
@@ -216,8 +221,9 @@ export const SearchCardWrapper = styled.div`
   .search-card-footer {
     /* height: 60px; */
     background-color: ${palette('darkGrayScale', 1)};
-    margin-bottom: 30px;
+    margin-bottom: 24px;
     padding: 10px 20px;
+    border-radius: 0px 0px 5px 5px;
   }
 `;
 

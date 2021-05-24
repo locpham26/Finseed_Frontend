@@ -1,5 +1,6 @@
 import { Button } from 'antd';
 import styled from 'styled-components';
+import { palette } from 'styled-theme';
 
 // TheHeader
 export const LoginButton = styled(Button)`
@@ -8,20 +9,23 @@ export const LoginButton = styled(Button)`
   font-family: 'Roboto', sans-serif;
   font-weight: 400;
   font-size: 14px;
-  background-color: #28e59c;
+  background: ${palette('gradient', 2)};
+  background-size: 200%;
   border-radius: 5px;
   border-color: transparent;
   color: black;
   &:hover,
   &:focus {
-    border-color: #28e59c;
-    background-color: transparent;
-    color: white;
+    background: ${palette('gradient', 2)};
+    background-size: 200%;
+    background-position: right center;
+    color: black;
+    border: none;
   }
 `;
 
 export const StyledLogoContainer = styled.a`
-  width: 60px;
+  width: 70px;
   height: 50px;
   cursor: pointer;
   display: inline-flex;
