@@ -22,7 +22,7 @@ function SearchAnwser(props) {
           <SearchAnswerTitle>
             <div>{answer.question}</div>
           </SearchAnswerTitle>
-          <Row gutter={16}>
+          <Row gutter={24}>
             <Col span={12}>
               <SearchAnswerTableWrapper>
                 <SearchTable data={answer.answer.data} />

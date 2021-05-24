@@ -237,7 +237,8 @@ export const SearchAnswerTitle = styled.div`
   border-radius: 3px;
   color: white;
   margin-top: 24px;
-  margin-bottom: 8px;
+  margin-bottom: 24px;
+  font-size: 20px;
 `;
 
 export const SearchAnswerTableWrapper = styled.div`
@@ -250,5 +251,5 @@ export const SearchAnswerChartWrapper = styled.div`
   height: 500px;
   border-radius: 5px;
   background: ${palette('darkGrayScale', 1)};
-  margin-bottom: 8px;
+  margin-bottom: 24px;
 `;
